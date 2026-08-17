@@ -1,0 +1,5 @@
+flet~=0.28.3
+edge-tts~=7.2
+mutagen~=1.48
+websockets~=17.0
+certifi

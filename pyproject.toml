@@ -1,0 +1,13 @@
+[project]
+name = "tts-studio"
+version = "0.1.0"
+description = "跨平台可视化 TTS 桌面工具（引擎可插拔：Edge TTS / 讯飞）"
+readme = "README.md"
+license = "MIT"
+keywords = ["tts", "text-to-speech", "flet", "edge-tts", "xfyun", "desktop-app"]
+
+[tool.flet.app]
+main = "main.py"
+org = "com.ttsstudio"
+pkg_name = "tts_studio"
+project = "TTS Studio"

@@ -1,0 +1,67 @@
+name: Build & Release
+
+# 推送 v* 标签时自动构建双平台安装包并发布 Release；
+# 也可在 Actions 页面手动触发（仅构建，不发布）。
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 构建 macOS .app
+        run: flet build macOS
+      - name: 打包 zip（保留可执行权限）
+        run: cd build/macos && zip -qry TTS-Studio-macOS.app.zip "TTS Studio.app" && mv TTS-Studio-macOS.app.zip ../..
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-app
+          path: TTS-Studio-macOS.app.zip
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+      - name: 构建 Windows .exe
+        run: flet build windows
+      - name: 打包 zip
+        run: Compress-Archive -Path build\windows\* -DestinationPath TTS-Studio-Windows.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-app
+          path: TTS-Studio-Windows.zip
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build-macos, build-windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: macos-app
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-app
+      - name: 发布 Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            TTS-Studio-macOS.app.zip
+            TTS-Studio-Windows.zip
+          generate_release_notes: true
