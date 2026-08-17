@@ -21,7 +21,7 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
       - name: 构建 macOS .app
-        run: flet build macOS
+        run: flet build macos
       - name: 打包 zip（保留可执行权限）
         run: cd build/macos && zip -qry TTS-Studio-macOS.app.zip "TTS Studio.app" && mv TTS-Studio-macOS.app.zip ../..
       - uses: actions/upload-artifact@v4
@@ -39,7 +39,11 @@ jobs:
       - name: 安装依赖
         run: pip install -r requirements.txt
       - name: 构建 Windows .exe
-        run: flet build windows
+        env:
+          PYTHONUTF8: "1"
+          PYTHONIOENCODING: "utf-8"
+        # --no-rich-output:进度条的 ● 字符超出 Windows 控制台 cp1252 编码，会崩
+        run: flet build windows --no-rich-output
       - name: 打包 zip
         run: Compress-Archive -Path build\windows\* -DestinationPath TTS-Studio-Windows.zip
       - uses: actions/upload-artifact@v4

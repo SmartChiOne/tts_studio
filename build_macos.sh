@@ -14,6 +14,6 @@ else
 fi
 
 echo "开始打包 macOS 应用..."
-flet build macOS
+flet build macos
 
 echo "完成。产物在 build/macos/"
