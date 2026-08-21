@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          flet build macos 2>&1 | tee build.log
+          flet build macos 2>&1 | tee ci-macos-build.log
       - name: 打包 zip（实际产物名以构建输出为准）
         shell: bash
         run: |
@@ -41,8 +41,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B ci-logs-macos
-          cp build.log ci-macos-build.log 2>/dev/null || true
-          find build -maxdepth 3 > ci-macos-tree.txt 2>/dev/null || true
+          find build -maxdepth 4 > ci-macos-tree.txt 2>/dev/null || true
           git add ci-macos-*.log ci-macos-*.txt || true
           git commit -m "macos logs ${{ github.run_id }}" || true
           git push origin ci-logs-macos -f
@@ -69,7 +68,7 @@ jobs:
         # --no-rich-output:进度条的 ● 字符超出 Windows 控制台 cp1252 编码，会崩
         run: |
           set -o pipefail
-          flet build windows --no-rich-output 2>&1 | tee build.log
+          flet build windows --no-rich-output 2>&1 | tee ci-windows-build.log
       - name: 打包 zip
         shell: pwsh
         run: Compress-Archive -Path build\windows\* -DestinationPath TTS-Studio-Windows.zip
@@ -80,8 +79,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B ci-logs-windows
-          cp build.log ci-windows-build.log 2>/dev/null || true
-          find build -maxdepth 3 > ci-windows-tree.txt 2>/dev/null || true
+          ls -la > ci-windows-ls.txt
+          find build -maxdepth 4 > ci-windows-tree.txt 2>/dev/null || true
           git add ci-windows-*.log ci-windows-*.txt || true
           git commit -m "windows logs ${{ github.run_id }}" || true
           git push origin ci-logs-windows -f
