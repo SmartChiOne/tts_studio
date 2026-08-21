@@ -1,0 +1,23 @@
+total 125
+drwxr-xr-x 1 runneradmin 197121     0 Aug 21 02:25 .
+drwxr-xr-x 1 runneradmin 197121     0 Aug 21 02:22 ..
+drwxr-xr-x 1 runneradmin 197121     0 Aug 21 02:25 .git
+drwxr-xr-x 1 runneradmin 197121     0 Aug 21 02:22 .github
+-rw-r--r-- 1 runneradmin 197121   150 Aug 21 02:22 .gitignore
+-rw-r--r-- 1 runneradmin 197121  1101 Aug 21 02:22 LICENSE
+-rw-r--r-- 1 runneradmin 197121  6246 Aug 21 02:22 README.md
+drwxr-xr-x 1 runneradmin 197121     0 Aug 21 02:24 build
+-rwxr-xr-x 1 runneradmin 197121   499 Aug 21 02:22 build_macos.sh
+-rw-r--r-- 1 runneradmin 197121   444 Aug 21 02:22 build_windows.bat
+-rw-r--r-- 1 runneradmin 197121 51519 Aug 21 02:25 ci-windows-build.log
+-rw-r--r-- 1 runneradmin 197121     0 Aug 21 02:25 ci-windows-ls.txt
+-rw-r--r-- 1 runneradmin 197121  1193 Aug 21 02:22 config.py
+-rw-r--r-- 1 runneradmin 197121 24488 Aug 21 02:22 main.py
+-rw-r--r-- 1 runneradmin 197121   375 Aug 21 02:22 pyproject.toml
+-rw-r--r-- 1 runneradmin 197121    71 Aug 21 02:22 requirements.txt
+-rwxr-xr-x 1 runneradmin 197121  1067 Aug 21 02:22 run_macos.sh
+-rw-r--r-- 1 runneradmin 197121   784 Aug 21 02:22 run_windows.bat
+-rw-r--r-- 1 runneradmin 197121  2457 Aug 21 02:22 test_core.py
+-rw-r--r-- 1 runneradmin 197121  2076 Aug 21 02:22 test_xfyun.py
+drwxr-xr-x 1 runneradmin 197121     0 Aug 21 02:22 tts_providers
+-rw-r--r-- 1 runneradmin 197121  2213 Aug 21 02:22 voice_cache.py
