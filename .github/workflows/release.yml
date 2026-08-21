@@ -42,7 +42,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -B ci-logs-macos
           find build -maxdepth 4 > ci-macos-tree.txt 2>/dev/null || true
-          git add ci-macos-*.log ci-macos-*.txt || true
+          git add -f ci-macos-*.log ci-macos-*.txt || true
           git commit -m "macos logs ${{ github.run_id }}" || true
           git push origin ci-logs-macos -f
       - uses: actions/upload-artifact@v4
@@ -81,7 +81,7 @@ jobs:
           git checkout -B ci-logs-windows
           ls -la > ci-windows-ls.txt
           find build -maxdepth 4 > ci-windows-tree.txt 2>/dev/null || true
-          git add ci-windows-*.log ci-windows-*.txt || true
+          git add -f ci-windows-*.log ci-windows-*.txt || true
           git commit -m "windows logs ${{ github.run_id }}" || true
           git push origin ci-logs-windows -f
       - uses: actions/upload-artifact@v4
